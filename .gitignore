@@ -1,0 +1,5 @@
+.vs
+ShiftRegister/bin
+ShiftRegister/obj/*
+MeadowApplication2Tests/
+ShiftRegister/ShiftRegister.csproj.user
