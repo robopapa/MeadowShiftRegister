@@ -1,7 +1,7 @@
 ﻿using Meadow;
 using System.Threading;
 
-namespace MeadowApplication2ShiftRegister
+namespace ShiftRegister
 {
     class Program
     {

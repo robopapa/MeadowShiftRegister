@@ -8,8 +8,9 @@
     <Compile Remove="HCSR-04.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Meadow.Foundation" Version="0.*" />
+    <PackageReference Include="Meadow.Foundation" Version="0.15.2" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Meadow.Foundation.ICs.IOExpanders.x74595" Version="0.1.4" />
   </ItemGroup>
 </Project>

@@ -2,59 +2,49 @@
 using Meadow.Devices;
 using System;
 using System.Threading;
+// Uncomment below if you want to use Meadow.Foundation Schema.
+//using Meadow.Foundation.ICs.IOExpanders;
+//using System.Linq;
 
 namespace ShiftRegister
 {
     public class MeadowApp : App<F7Micro, MeadowApp>
     {
+        // comment below variable if you want to use Meadow.Foundation Schema
         Shift74HC595 shift;
+        // Uncomment below variable to use Meadow.Foundation Schema
+        //x74595 shiftRegister;
         
         public MeadowApp()
         {
             Console.WriteLine("Initializing....");
             Initialize();
-            Console.WriteLine("set first pin to 1");
-
-            //shift.SendData(true);
-            //shift.SendData(true);
-            //shift.SendData(false);
-            //shift.SendData(true);
-            //shift.SendData(false);
-            //shift.Update();
-
-            //shift.SendData(11);
-            //shift.Update();
             Loop();
-            /*for(var index = 1; index < 256; ++index)
-            {
-                shift.SendData((byte)index);
-                Thread.Sleep(2000);
-            }
-            Thread.Sleep(750);
-            for (var index = 255; index >= 0; --index)
-            {
-                shift.SendData((byte)index);
-                Thread.Sleep(750);
-            }*/
         }
 
         void Initialize()
         {
+            // comment below code if you want to use Meadow.Foundation Schema.
             shift = new Shift74HC595(
                 Device,
                 Device.Pins.D15,
                 Device.Pins.D14,
                 Device.Pins.D13,
                 Device.Pins.D12);
-
+            
             Console.WriteLine("Clear Register");
             shift.Clear();
+            // Uncomment below code if you want to use Meadow.Foundation Schema.
+            /*
+            shiftRegister = new x74595(Device, Device.CreateSpiBus(), Device.Pins.D03, 8);
+            */
         }
 
         void Loop()
         {
             while(true)
             {
+                // comment this code if you want to use Meadow.Foundation schema
                 for(int index=0; index < 9; ++index)
                 {
                     shift.SendData((byte)Math.Pow(2,index));
@@ -68,6 +58,20 @@ namespace ShiftRegister
                     shift.Update();
                     Thread.Sleep(100);
                 }
+                /* Uncomment if you want to use Meadow.Foundation schema
+                foreach(var pin in shiftRegister.Pins.AllPins)
+                {
+                    shiftRegister.WriteToPin(pin, true);
+                    Thread.Sleep(100);
+                    shiftRegister.WriteToPin(pin, false);
+                }
+                foreach(var pin in shiftRegister.Pins.AllPins.Reverse())
+                {
+                    shiftRegister.WriteToPin(pin, true);
+                    Thread.Sleep(100);
+                    shiftRegister.WriteToPin(pin, false);
+                }
+                */
             }
         }        
     }
